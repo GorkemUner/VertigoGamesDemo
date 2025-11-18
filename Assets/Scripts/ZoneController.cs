@@ -39,7 +39,7 @@ public class ZoneController : Singleton<ZoneController>
     [SerializeField] private InfiniteZoneSlider infiniteZoneSlider;
     private void Start()
     {
-        CalculateZoneType(currZone);
+        CalculateZoneType(CurrZone);
         WheelController.Instance.FillWheel(CurrZone);
     }
 
@@ -62,6 +62,7 @@ public class ZoneController : Singleton<ZoneController>
     {
         infiniteZoneSlider.Restart();
         currZone = 1;
+        CalculateZoneType(currZone);
         WheelController.Instance.FillWheel(CurrZone);
     }
 }
