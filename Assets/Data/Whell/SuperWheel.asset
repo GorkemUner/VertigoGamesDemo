@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6a6821af92294b73ace80e86bfc29aa, type: 3}
+  m_Name: SuperWheel
+  m_EditorClassIdentifier: 
+  type: 2
+  MustRewards:
+  - {fileID: 11400000, guid: 9478eafaa7ff64c3baa3d2fa84159ba6, type: 2}
+  - {fileID: 11400000, guid: d7f1ab1ac7ad84f51b543b19ae2adacd, type: 2}
+  - {fileID: 11400000, guid: 3b6bd22d2d5eb4030a6fcc7462acac7f, type: 2}
+  - {fileID: 11400000, guid: 775d8ce6150c0433f81d53fdae75fe7f, type: 2}
+  - {fileID: 11400000, guid: 5fefb463066b94a3981ab44ab19a86f4, type: 2}
+  - {fileID: 11400000, guid: c8fae2614e9414f4cb69dcab741bd71a, type: 2}
+  - {fileID: 11400000, guid: b8b3ac8e9c46b4fb2866b18be88b9219, type: 2}
+  - {fileID: 11400000, guid: 4187aa412934644fc829b7575e2dadf3, type: 2}
+  PreferredRewards: []
