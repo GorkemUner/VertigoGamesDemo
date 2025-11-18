@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class GameDesignerProvider : MonoBehaviour, IWheelDataProvider
@@ -14,9 +15,9 @@ public class GameDesignerProvider : MonoBehaviour, IWheelDataProvider
 
     public WheelData GetData(int zone)
     {
-        if (zone >= wheelData.Count)
-            return null;
+        //if (zone >= wheelData.Count)
+        //    return null;
 
-        return wheelData[zone];
+        return wheelData.FirstOrDefault(x=>x.zone == zone);
     }
 }

@@ -1303,7 +1303,7 @@ Transform:
   - {fileID: 1515884862}
   - {fileID: 870937788}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &356317476
 GameObject:
@@ -5795,7 +5795,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1594970770
 GameObject:
@@ -5826,7 +5826,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1919d69bd7a244ecb85358746f59fa4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wheelData: []
+  wheelData:
+  - zone: 3
+    rewards:
+    - id: 1
+      baseReward: 1000000
+    - id: 22
+      baseReward: 7323
+    - id: 29
+      baseReward: 2
+    - id: 31
+      baseReward: 3
+    - id: 26
+      baseReward: 5433
+    - id: 17
+      baseReward: 543
+    - id: 7
+      baseReward: 21
+    - id: 24
+      baseReward: 432
+    willWonRewardId: 1
 --- !u!4 &1594970772
 Transform:
   m_ObjectHideFlags: 0
@@ -5840,7 +5859,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1615660733
 GameObject:
@@ -6038,7 +6057,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   priority: 50
-  wheelData: []
+  wheelData:
+  - zone: 2
+    rewards:
+    - id: 1
+      baseReward: 1000000
+    - id: 22
+      baseReward: 7323
+    - id: 29
+      baseReward: 2
+    - id: 31
+      baseReward: 3
+    - id: 26
+      baseReward: 5433
+    - id: 17
+      baseReward: 543
+    - id: 7
+      baseReward: 21
+    - id: 24
+      baseReward: 432
+    willWonRewardId: 1
 --- !u!114 &1659008867
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6067,7 +6105,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1661727421
 GameObject:
