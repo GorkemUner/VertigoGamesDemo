@@ -55,7 +55,6 @@ public class ZoneController : Singleton<ZoneController>
 
     public void NextZone()
     {
-
         infiniteZoneSlider.ShiftLeft(() =>
         {
             CurrZone++;
