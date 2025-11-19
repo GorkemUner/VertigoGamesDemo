@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c6a6821af92294b73ace80e86bfc29aa, type: 3}
-  m_Name: Coin
+  m_Name: CustomOnlyBomb
   m_EditorClassIdentifier: 
   type: 0
   MustRewards:
-  - {fileID: 11400000, guid: df372fc9555d74ab6af82995906afa58, type: 2}
+  - {fileID: 11400000, guid: da041c6fec08c4ea3b4e918846c20f74, type: 2}
   PreferredRewards:
-  - {fileID: 11400000, guid: df372fc9555d74ab6af82995906afa58, type: 2}
+  - {fileID: 11400000, guid: da041c6fec08c4ea3b4e918846c20f74, type: 2}
