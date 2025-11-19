@@ -1,11 +1,12 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-public class OnZoneTypeChanged : UnityEvent<WheelZoneType> { }
 public class OnCurrZoneChanged : UnityEvent<int> { }
 
 public class ZoneController : Singleton<ZoneController>
 {
+    [SerializeField] private InfiniteZoneSlider infiniteZoneSlider;
+
     private const int safeZoneModule = 5;
     public int SafeZoneModule => safeZoneModule;
 
@@ -14,7 +15,7 @@ public class ZoneController : Singleton<ZoneController>
 
     public OnCurrZoneChanged OnCurrZoneChanged = new OnCurrZoneChanged();
 
-    private int currZone = 1;
+    private int currZone;
     public int CurrZone
     {
         get => currZone;
@@ -26,7 +27,6 @@ public class ZoneController : Singleton<ZoneController>
         }
     }
 
-    public OnZoneTypeChanged OnZoneTypeChange = new OnZoneTypeChanged();
     private WheelZoneType currZoneType = WheelZoneType.Normal;
     public WheelZoneType CurrZoneType
     {
@@ -34,18 +34,16 @@ public class ZoneController : Singleton<ZoneController>
         set
         {
             currZoneType = value;
-            OnZoneTypeChange.Invoke(currZoneType);
         }
     }
 
-    [SerializeField] private InfiniteZoneSlider infiniteZoneSlider;
     private void Start()
     {
-        CalculateZoneType(CurrZone);
+        CurrZone = 1;
         WheelController.Instance.FillWheel(CurrZone);
     }
 
-    public void CalculateZoneType(int zone)
+    private void CalculateZoneType(int zone)
     {
         if (zone % superZoneModule == 0)
             CurrZoneType = WheelZoneType.Super;
@@ -57,9 +55,10 @@ public class ZoneController : Singleton<ZoneController>
 
     public void NextZone()
     {
-        CurrZone++;
+
         infiniteZoneSlider.ShiftLeft(() =>
         {
+            CurrZone++;
             WheelController.Instance.FillWheel(currZone);
             if (WheelController.Instance.WheelData.willWonRewardId != RewardIDs.bomb)
                 GameStateManager.Instance.SetState(GameStateManager.Instance.IdleState);
@@ -71,7 +70,6 @@ public class ZoneController : Singleton<ZoneController>
     {
         infiniteZoneSlider.Restart();
         CurrZone = 1;
-        CalculateZoneType(currZone);
         WheelController.Instance.FillWheel(CurrZone);
     }
 }

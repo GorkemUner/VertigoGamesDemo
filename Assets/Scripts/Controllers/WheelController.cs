@@ -39,13 +39,13 @@ public class WheelController : Singleton<WheelController>
     private void OnEnable()
     {
         spinBtn.onClick.AddListener(Spin);
-        ZoneController.Instance.OnZoneTypeChange.AddListener(OnZoneTypeChange);
+        ZoneController.Instance.OnCurrZoneChanged.AddListener(OnCurrZoneChanged);
     }
 
     private void OnDisable()
     {
         spinBtn.onClick.RemoveListener(Spin);
-        ZoneController.Instance.OnZoneTypeChange.RemoveListener(OnZoneTypeChange);
+        ZoneController.Instance.OnCurrZoneChanged.RemoveListener(OnCurrZoneChanged);
     }
 
     private void OnValidate()
@@ -86,9 +86,9 @@ public class WheelController : Singleton<WheelController>
         ZoneController.Instance.NextZone();
     }
 
-    private void OnZoneTypeChange(WheelZoneType wheelZoneType)
+    private void OnCurrZoneChanged(int currZone)
     {
-        switch (wheelZoneType)
+        switch (ZoneController.Instance.CurrZoneType)
         {
             case WheelZoneType.Normal:
                 SetRollerAndPin(normalRollerSprite,normalPinSprite,"NORMAL SPIN", "Basic Rewards", normalColor);
