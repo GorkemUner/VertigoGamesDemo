@@ -5827,7 +5827,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   wheelData:
-  - zone: 4
+  - zone: 60
     rewards:
     - id: 9
       baseReward: 1000000
@@ -6058,7 +6058,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   priority: 50
   wheelData:
-  - zone: 2
+  - zone: 5
     rewards:
     - id: 1
       baseReward: 1000000
