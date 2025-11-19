@@ -83,8 +83,6 @@ public class WheelController : Singleton<WheelController>
 
         PendingRewardsPanel.Instance.CreateItemWheelData(wheelData);
         ZoneController.Instance.NextZone();
-
-
     }
 
     private void OnZoneTypeChange(WheelZoneType wheelZoneType)
@@ -112,7 +110,6 @@ public class WheelController : Singleton<WheelController>
         titleText.color = color;
         descText.color = color;
     }
-
 
     void OnDestroy()
     {
