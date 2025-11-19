@@ -2,7 +2,8 @@ using UnityEngine;
 using UnityEngine.Events;
 
 [System.Serializable]
-public class OnZoneTypeChange : UnityEvent<WheelZoneType> { }
+public class OnZoneTypeChanged : UnityEvent<WheelZoneType> { }
+public class OnCurrZoneChanged : UnityEvent<int> { }
 
 public class ZoneController : Singleton<ZoneController>
 {
@@ -12,6 +13,8 @@ public class ZoneController : Singleton<ZoneController>
     private const int superZoneModule = 10;
     public int SuperZoneModule => superZoneModule;
 
+    public OnCurrZoneChanged OnCurrZoneChanged = new OnCurrZoneChanged();
+
     private int currZone = 1;
     public int CurrZone
     {
@@ -20,11 +23,11 @@ public class ZoneController : Singleton<ZoneController>
         {
             currZone = value;
             CalculateZoneType(currZone);
-            infiniteZoneSlider.ShiftLeft(() => WheelController.Instance.FillWheel(currZone));
+            OnCurrZoneChanged.Invoke(currZone);
         }
     }
 
-    public OnZoneTypeChange OnZoneTypeChange = new OnZoneTypeChange();
+    public OnZoneTypeChanged OnZoneTypeChange = new OnZoneTypeChanged();
     private WheelZoneType currZoneType = WheelZoneType.Normal;
     public WheelZoneType CurrZoneType
     {
@@ -56,12 +59,13 @@ public class ZoneController : Singleton<ZoneController>
     public void Next()
     {
         CurrZone++;
+        infiniteZoneSlider.ShiftLeft(() => WheelController.Instance.FillWheel(currZone));
     }
 
     public void Restart()
     {
         infiniteZoneSlider.Restart();
-        currZone = 1;
+        CurrZone = 1;
         CalculateZoneType(currZone);
         WheelController.Instance.FillWheel(CurrZone);
     }

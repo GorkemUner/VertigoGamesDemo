@@ -17,12 +17,12 @@ public class ZoneInfoPanel : MonoBehaviour
 
     private void OnEnable()
     {
-        ZoneController.Instance.OnZoneTypeChange.AddListener(OnZoneTypeChange);
+        ZoneController.Instance.OnCurrZoneChanged.AddListener(OnCurrZoneChanged);
     }
 
     private void OnDisable()
     {
-        ZoneController.Instance.OnZoneTypeChange.RemoveListener(OnZoneTypeChange);
+        ZoneController.Instance.OnCurrZoneChanged.RemoveListener(OnCurrZoneChanged);
     }
 
     private void Start()
@@ -41,14 +41,13 @@ public class ZoneInfoPanel : MonoBehaviour
         increaseAmount = target;
     }
 
-    private void OnZoneTypeChange(WheelZoneType zoneType)
+    private void OnCurrZoneChanged(int currZone)
     {
-        if (zoneType == targetZoneType)
-        {
+        target = ((currZone / (targetZoneType == WheelZoneType.Safe ? ZoneController.Instance.SafeZoneModule : ZoneController.Instance.SuperZoneModule) + 1)) * increaseAmount;
+
+        if (targetZoneType == WheelZoneType.Safe && ((target % ZoneController.Instance.SuperZoneModule) == 0))
             target += increaseAmount;
-            if(targetZoneType == WheelZoneType.Safe && (target % ZoneController.Instance.SuperZoneModule == 0))
-                target += increaseAmount;
-            info.text = target.ToString();
-        }
+
+        info.text = target.ToString();
     }
 }
