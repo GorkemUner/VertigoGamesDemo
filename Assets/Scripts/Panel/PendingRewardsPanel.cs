@@ -38,6 +38,9 @@ public class PendingRewardsPanel : Singleton<PendingRewardsPanel>
 
     public void CreateItemWheelData(WheelData wheelData)
     {
+        if (wheelData.willWonRewardId == RewardIDs.bomb)
+            return;
+
         var sprite = ClientItemDatabase.Instance.GetItem((int)wheelData.willWonRewardId);
         var amount = wheelData.rewards[wheelData.rewards.IndexOf(wheelData.rewards.First(x => x.id == wheelData.willWonRewardId))].baseReward;
 
