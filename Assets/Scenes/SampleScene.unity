@@ -5827,25 +5827,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   wheelData:
-  - zone: 3
+  - zone: 4
     rewards:
-    - id: 1
+    - id: 9
       baseReward: 1000000
     - id: 22
       baseReward: 7323
-    - id: 29
+    - id: 23
       baseReward: 2
-    - id: 31
+    - id: 24
       baseReward: 3
     - id: 26
       baseReward: 5433
-    - id: 17
+    - id: 33
       baseReward: 543
-    - id: 7
+    - id: 32
       baseReward: 21
-    - id: 24
+    - id: 31
       baseReward: 432
-    willWonRewardId: 1
+    willWonRewardId: 9
 --- !u!4 &1594970772
 Transform:
   m_ObjectHideFlags: 0
@@ -6066,7 +6066,7 @@ MonoBehaviour:
       baseReward: 7323
     - id: 29
       baseReward: 2
-    - id: 31
+    - id: 33
       baseReward: 3
     - id: 26
       baseReward: 5433
