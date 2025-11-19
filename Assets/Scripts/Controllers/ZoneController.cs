@@ -56,7 +56,7 @@ public class ZoneController : Singleton<ZoneController>
             CurrZoneType = WheelZoneType.Normal;
     }
 
-    public void Next()
+    public void NextZone()
     {
         CurrZone++;
         infiniteZoneSlider.ShiftLeft(() => WheelController.Instance.FillWheel(currZone));

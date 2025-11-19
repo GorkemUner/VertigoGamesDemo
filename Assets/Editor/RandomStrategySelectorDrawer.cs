@@ -26,6 +26,5 @@ public class RandomStrategySelectorDrawer : PropertyDrawer
             property.stringValue = names[newIndex];
         }
     }
-
 }
 #endif

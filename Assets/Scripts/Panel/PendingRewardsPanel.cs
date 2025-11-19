@@ -21,7 +21,7 @@ public class PendingRewardsPanel : Singleton<PendingRewardsPanel>
 
     private void OnDisable()
     {
-        collectExitBtn.onClick.AddListener(OnClickCollectExit);
+        collectExitBtn.onClick.RemoveListener(OnClickCollectExit);
     }
 
     private void OnClickCollectExit()
@@ -79,6 +79,4 @@ public class PendingRewardsPanel : Singleton<PendingRewardsPanel>
         rewardIdItem.Clear();
         collectExitBtn.interactable = ZoneController.Instance.CurrZoneType != WheelZoneType.Normal;
     }
-
-
 }

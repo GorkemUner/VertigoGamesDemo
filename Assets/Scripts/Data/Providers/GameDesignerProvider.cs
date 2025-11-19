@@ -15,9 +15,6 @@ public class GameDesignerProvider : MonoBehaviour, IWheelDataProvider
 
     public WheelData GetData(int zone)
     {
-        //if (zone >= wheelData.Count)
-        //    return null;
-
         return wheelData.FirstOrDefault(x=>x.zone == zone);
     }
 }

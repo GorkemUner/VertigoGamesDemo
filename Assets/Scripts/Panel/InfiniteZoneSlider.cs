@@ -10,11 +10,11 @@ public class InfiniteZoneSlider : MonoBehaviour
     [SerializeField] private float itemWidth;
     [SerializeField] private float speed;
     [SerializeField] private float leftBorderX;
+    [SerializeField] private float shiftTime = .4f;
 
     private int zone = 19;
     private int spacing = 50;
     private bool isAnimating = false;
-    [SerializeField] private float shiftTime = .4f;
 
     public void ShiftLeft(Action EndAction = null)
     {

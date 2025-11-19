@@ -3,22 +3,10 @@ using System.Linq;
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class WheelController : Singleton<WheelController>
 {
-    private int spinCountMin = 2, spinCountMax = 5;
-    private const float angleBetweenRewards = 45;
-    private const float rotateDuration = 2f;
-    private const int sliceCount = 8;
-    public int SliceCount => sliceCount;
-
-    [SerializeField]private List<RewardItem> rewardItems;
-
-    private WheelData wheelData = new WheelData();
-    private Button spinBtn;
-
     [SerializeField] private Transform wheelTransform;
     [SerializeField] private Sprite normalRollerSprite;
     [SerializeField] private Sprite normalPinSprite;
@@ -33,8 +21,17 @@ public class WheelController : Singleton<WheelController>
     [SerializeField] private Color normalColor;
     [SerializeField] private Color safeColor;
     [SerializeField] private Color superColor;
+    [SerializeField] private List<RewardItem> rewardItems;
 
-    int resultRewardIndex;
+    private int spinCountMin = 2, spinCountMax = 5;
+    private int resultRewardIndex;
+    private const float angleBetweenRewards = 45;
+    private const float rotateDuration = 2f;
+    private WheelData wheelData = new WheelData();
+    private Button spinBtn;
+
+    private const int sliceCount = 8;
+    public int SliceCount => sliceCount;
 
     private void OnEnable()
     {
@@ -84,11 +81,10 @@ public class WheelController : Singleton<WheelController>
             GameStateManager.Instance.SetState(GameStateManager.Instance.BombState);
 
         PendingRewardsPanel.Instance.CreateItemWheelData(wheelData);
-        ZoneController.Instance.Next();
+        ZoneController.Instance.NextZone();
 
         if (wheelData.willWonRewardId != RewardIDs.bomb)
             GameStateManager.Instance.SetState(GameStateManager.Instance.IdleState);
-
     }
 
     private void OnZoneTypeChange(WheelZoneType wheelZoneType)

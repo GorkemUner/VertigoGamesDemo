@@ -4,7 +4,6 @@ public interface IWheelDataProvider
 {
     public int Priority { get; }
     public WheelData GetData(int zone);
-    //public void Register(IWheelDataProvider provider);
 }
 
 [System.Serializable]

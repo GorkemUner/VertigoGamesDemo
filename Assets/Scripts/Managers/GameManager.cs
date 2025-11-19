@@ -10,6 +10,5 @@ public class GameManager : Singleton<GameManager>
         ZoneController.Instance.Restart();
         PendingRewardsPanel.Instance.Restart();
         GameStateManager.Instance.SetState(GameStateManager.Instance.IdleState);
-
     }
 }

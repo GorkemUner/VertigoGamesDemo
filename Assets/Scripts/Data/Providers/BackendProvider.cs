@@ -6,9 +6,9 @@ public class BackendProvider : MonoBehaviour, IWheelDataProvider
 {
     [SerializeField] private string URL;
     [SerializeField] private int priority = 100;
-    [HideInInspector] public List<WheelData> backendData;
 
-    int IWheelDataProvider.Priority { get => priority;}
+    private List<WheelData> backendData;
+    public int Priority => priority;
 
     private void OnEnable()
     {

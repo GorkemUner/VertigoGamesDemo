@@ -8,12 +8,10 @@ public class ZoneInfoPanel : MonoBehaviour
     TextMeshProUGUI info;
     [SerializeField] private WheelZoneType targetZoneType;
 
-    #if UNITY_EDITOR
     private void OnValidate()
     {
         info = GetComponentInChildren<TextMeshProUGUI>();
     }
-    #endif
 
     private void OnEnable()
     {

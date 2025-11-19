@@ -24,7 +24,6 @@ public class RandomProvider : Singleton<RandomProvider>, IWheelDataProvider
         strategy = CreateStrategyInstance();
     }
 
-
     private void OnEnable()
     {
         WheelResolver.Register(this);

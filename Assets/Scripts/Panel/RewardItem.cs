@@ -7,12 +7,6 @@ public class RewardItem : MonoBehaviour
     [SerializeField] protected Image itemImage;
     [SerializeField] protected TextMeshProUGUI multiplierTxt;
 
-    //private void OnValidate()
-    //{
-    //    itemImage = GetComponentInChildren<Image>();
-    //    multiplierTxt = GetComponentInChildren<TextMeshProUGUI>();
-    //}
-
     public virtual void Fill(Sprite sprite, int amount)
     {
         itemImage.sprite = sprite;
