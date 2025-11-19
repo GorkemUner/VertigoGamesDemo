@@ -1,83 +1,92 @@
+using Data.ScriptableObjects;
+using Managers;
+using Other;
+using Panel;
+using StateMachine.States;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class OnCurrZoneChanged : UnityEvent<int> { }
-
-public class ZoneController : Singleton<ZoneController>
+namespace Controllers
 {
-    [SerializeField] private InfiniteZoneSlider infiniteZoneSlider;
+    public class OnCurrZoneChanged : UnityEvent<int> { }
 
-    private const int safeZoneModule = 5;
-    public int SafeZoneModule => safeZoneModule;
-
-    private const int superZoneModule = 10;
-    public int SuperZoneModule => superZoneModule;
-
-    public OnCurrZoneChanged OnCurrZoneChanged = new OnCurrZoneChanged();
-
-    private int currZone;
-    public int CurrZone
+    public class ZoneController : Singleton<ZoneController>
     {
-        get => currZone;
-        private set
+        [SerializeField] private InfiniteZoneSlider infiniteZoneSlider;
+
+        private const int safeZoneModule = 5;
+        public int SafeZoneModule => safeZoneModule;
+
+        private const int superZoneModule = 10;
+        public int SuperZoneModule => superZoneModule;
+
+        public OnCurrZoneChanged OnCurrZoneChanged = new OnCurrZoneChanged();
+
+        private int currZone;
+        public int CurrZone
         {
-            currZone = value;
-            CalculateZoneType(currZone);
-            OnCurrZoneChanged.Invoke(currZone);
+            get => currZone;
+            private set
+            {
+                currZone = value;
+                CalculateZoneType(currZone);
+                OnCurrZoneChanged.Invoke(currZone);
+            }
+        }
+
+        private WheelZoneType currZoneType = WheelZoneType.Normal;
+        public WheelZoneType CurrZoneType
+        {
+            get => currZoneType;
+            set
+            {
+                currZoneType = value;
+            }
+        }
+
+        private void Start()
+        {
+            CurrZone = 1;
+            WheelController.Instance.FillWheel(CurrZone);
+        }
+
+        private void CalculateZoneType(int zone)
+        {
+            if (zone % superZoneModule == 0)
+                CurrZoneType = WheelZoneType.Super;
+            else if (zone % safeZoneModule == 0)
+                CurrZoneType  = WheelZoneType.Safe;
+            else
+                CurrZoneType = WheelZoneType.Normal;
+        }
+
+        public void NextZone()
+        {
+            infiniteZoneSlider.ShiftLeft(() =>
+            {
+                CurrZone++;
+
+                if (WheelController.Instance.WheelData.willWonRewardId != RewardIDs.bomb)
+                    GameManager.StateMachine.EnterState<IdleState>();
+
+
+                WheelController.Instance.FillWheel(currZone);
+
+            });
+        }
+
+        public void Restart()
+        {
+            infiniteZoneSlider.Restart();
+            CurrZone = 1;
+            WheelController.Instance.FillWheel(CurrZone);
         }
     }
 
-    private WheelZoneType currZoneType = WheelZoneType.Normal;
-    public WheelZoneType CurrZoneType
+    public enum WheelZoneType
     {
-        get => currZoneType;
-        set
-        {
-            currZoneType = value;
-        }
+        Normal,
+        Safe,
+        Super
     }
-
-    private void Start()
-    {
-        CurrZone = 1;
-        WheelController.Instance.FillWheel(CurrZone);
-    }
-
-    private void CalculateZoneType(int zone)
-    {
-        if (zone % superZoneModule == 0)
-            CurrZoneType = WheelZoneType.Super;
-        else if (zone % safeZoneModule == 0)
-            CurrZoneType  = WheelZoneType.Safe;
-        else
-            CurrZoneType = WheelZoneType.Normal;
-    }
-
-    public void NextZone()
-    {
-        infiniteZoneSlider.ShiftLeft(() =>
-        {
-            CurrZone++;
-
-            if (WheelController.Instance.WheelData.willWonRewardId != RewardIDs.bomb)
-                GameStateManager.Instance.SetState(GameStateManager.Instance.IdleState);
-
-            WheelController.Instance.FillWheel(currZone);
-
-        });
-    }
-
-    public void Restart()
-    {
-        infiniteZoneSlider.Restart();
-        CurrZone = 1;
-        WheelController.Instance.FillWheel(CurrZone);
-    }
-}
-
-public enum WheelZoneType
-{
-    Normal,
-    Safe,
-    Super
 }

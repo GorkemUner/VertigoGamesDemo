@@ -1,44 +1,34 @@
-using System;
+using Data.ScriptableObjects;
+using Other;
+using Strategy;
 using UnityEngine;
 
-public class RandomProvider : Singleton<RandomProvider>, IWheelDataProvider
+namespace Data.Providers
 {
-    [SerializeField] private int priority = 50;
-    public int Priority => priority;
-
-    private BaseRandomStrategy strategy;
-    public BaseRandomStrategy Strategy => strategy;
-
-    [Space]
-    [Header ("VertigoGamesStrategyAssets")]
-    [SerializeField] public WheelSO normalZoneSO;
-    [SerializeField] public WheelSO safeZoneSO;
-    [SerializeField] public WheelSO superZoneSO;
-    [Space]
-
-    [RandomStrategySelector]
-    [SerializeField] private string selectedStrategyClassName;
-
-    private void Awake()
+    public class RandomProvider : Singleton<RandomProvider>, IWheelDataProvider
     {
-        strategy = CreateStrategyInstance();
-    }
+        [SerializeField] private int priority = 50;
 
-    private void OnEnable()
-    {
-        WheelResolver.Register(this);
-    }
+        [SerializeField] private BaseRandomStrategy strategy;
 
-    public WheelData GetData(int zone)
-    {
-        return Strategy.Generate();
-    }
+        [Space]
+        [Header ("VertigoGamesStrategyAssets")]
+        [SerializeField] public WheelSO normalZoneSO;
+        [SerializeField] public WheelSO safeZoneSO;
+        [SerializeField] public WheelSO superZoneSO;
+        
+        public int Priority => priority;
+        public BaseRandomStrategy Strategy => strategy;
+        
+        private void OnEnable()
+        {
+            WheelResolver.Register(this);
+        }
 
-    private BaseRandomStrategy CreateStrategyInstance()
-    {
-        var type = Type.GetType(selectedStrategyClassName);
-        if (type == null)
-            Debug.LogError("Strategy is not found: " + selectedStrategyClassName);
-        return Activator.CreateInstance(type) as BaseRandomStrategy;
+        public WheelData GetData(int zone)
+        {
+            return Strategy.Generate();
+        }
+        
     }
 }

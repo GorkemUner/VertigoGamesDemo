@@ -1,33 +1,45 @@
-using UnityEngine;
+using Managers;
+using StateMachine.States;
+using StateMachine.UI;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
-public class CollectedPanel : MonoBehaviour
+namespace Panel
 {
-    private Button restartBtn;
-
-    private void OnValidate()
+    public class CollectedPanel : BaseUIStatePanel
     {
-        restartBtn = GetComponentInChildren<Button>(true);
-    }
+        private Button restartBtn;
 
-    private void OnEnable()
-    {
-        restartBtn.onClick.AddListener(Restart);
-    }
+        private void OnValidate()
+        {
+            restartBtn = GetComponentInChildren<Button>(true);
+        }
 
-    private void OnDisable()
-    {
-        restartBtn.onClick.RemoveListener(Restart);
-    }
+        private void OnEnable()
+        {
+            restartBtn.onClick.AddListener(Restart);
+        }
 
-    private void Restart()
-    {
-        GameManager.Instance.Restart();
-        HidePanel();
-    }
+        private void OnDisable()
+        {
+            restartBtn.onClick.RemoveListener(Restart);
+        }
 
-    private void HidePanel()
-    {
-        transform.gameObject.SetActive(false);
+        private void Restart()
+        {
+            GameManager.Instance.Restart();
+            HidePanel();
+        }
+
+        private void HidePanel()
+        {
+            transform.gameObject.SetActive(false);
+        }
+
+        protected override UnityEvent OnStateEnter() => GameManager.StateMachine.GetState<CollectState>().OnEnter;
+
+        protected override UnityEvent OnStateExit()=> GameManager.StateMachine.GetState<CollectState>().OnExit;
+
+        protected override bool InState() => GameManager.StateMachine.IsInState<CollectState>();
     }
 }

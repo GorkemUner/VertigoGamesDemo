@@ -1,14 +1,18 @@
 using System.Collections.Generic;
+using Other;
 
-public class BackendDummy : Singleton<BackendDummy>
+namespace Data.Providers
 {
-    private BackendProvider bp;
-
-    public List<WheelData> wheelData;
-
-    public void SendRequest(BackendProvider bp, string URL)
+    public class BackendDummy : Singleton<BackendDummy>
     {
-        this.bp = bp;
-        bp.Response(wheelData);
+        private BackendProvider bp;
+
+        public List<WheelData> wheelData;
+
+        public void SendRequest(BackendProvider bp, string URL)
+        {
+            this.bp = bp;
+            bp.Response(wheelData);
+        }
     }
 }

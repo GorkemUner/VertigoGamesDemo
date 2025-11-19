@@ -2,19 +2,22 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class GameDesignerProvider : MonoBehaviour, IWheelDataProvider
+namespace Data.Providers
 {
-    [SerializeField] private int priority = 50;
-    [SerializeField] private List<WheelData> wheelData;
-    public int Priority => priority;
-
-    private void OnEnable()
+    public class GameDesignerProvider : MonoBehaviour, IWheelDataProvider
     {
-        WheelResolver.Register(this);
-    }
+        [SerializeField] private int priority = 50;
+        [SerializeField] private List<WheelData> wheelData;
+        public int Priority => priority;
 
-    public WheelData GetData(int zone)
-    {
-        return wheelData.FirstOrDefault(x=>x.zone == zone);
+        private void OnEnable()
+        {
+            WheelResolver.Register(this);
+        }
+
+        public WheelData GetData(int zone)
+        {
+            return wheelData.FirstOrDefault(x=>x.zone == zone);
+        }
     }
 }

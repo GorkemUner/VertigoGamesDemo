@@ -2,32 +2,35 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class BackendProvider : MonoBehaviour, IWheelDataProvider
+namespace Data.Providers
 {
-    [SerializeField] private string URL;
-    [SerializeField] private int priority = 100;
-
-    private List<WheelData> backendData;
-    public int Priority => priority;
-
-    private void OnEnable()
+    public class BackendProvider : MonoBehaviour, IWheelDataProvider
     {
-        WheelResolver.Register(this);
-        SendRequest();
-    }
+        [SerializeField] private string URL;
+        [SerializeField] private int priority = 100;
 
-    public void SendRequest()
-    {
-        BackendDummy.Instance.SendRequest(this, URL);
-    }
+        private List<WheelData> backendData;
+        public int Priority => priority;
 
-    public void Response(List<WheelData> wheelData)
-    {
-        backendData = wheelData;
-    }
+        private void OnEnable()
+        {
+            WheelResolver.Register(this);
+            SendRequest();
+        }
 
-    public WheelData GetData(int zone)
-    {
-        return backendData.FirstOrDefault(x=>x.zone == zone);
+        public void SendRequest()
+        {
+            BackendDummy.Instance.SendRequest(this, URL);
+        }
+
+        public void Response(List<WheelData> wheelData)
+        {
+            backendData = wheelData;
+        }
+
+        public WheelData GetData(int zone)
+        {
+            return backendData.FirstOrDefault(x=>x.zone == zone);
+        }
     }
 }

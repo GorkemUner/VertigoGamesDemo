@@ -1,4 +1,10 @@
-public abstract class BaseRandomStrategy
+using Data.Providers;
+using UnityEngine;
+
+namespace Strategy
 {
-    public abstract WheelData Generate();
+    public abstract class BaseRandomStrategy : ScriptableObject
+    {
+        public abstract WheelData Generate();
+    }
 }

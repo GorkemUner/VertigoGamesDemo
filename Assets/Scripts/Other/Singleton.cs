@@ -1,34 +1,37 @@
 using UnityEngine;
 
-public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
+namespace Other
 {
-    private static object _lock = new object();
-    private static T _instance;
-
-    public static T Instance
+    public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
     {
-        get
+        private static object _lock = new object();
+        private static T _instance;
+
+        public static T Instance
         {
-            if (applicationIsQuitting) {
-                return null;
-            }
-
-            lock (_lock)
+            get
             {
-                if (_instance == null)
-                {
-                    _instance = (T)FindObjectOfType(typeof(T));
-
-                    if (FindObjectsOfType(typeof(T)).Length > 1)
-                    {
-                        return _instance;
-                    }
-                
+                if (applicationIsQuitting) {
+                    return null;
                 }
-                return _instance;
+
+                lock (_lock)
+                {
+                    if (_instance == null)
+                    {
+                        _instance = (T)FindObjectOfType(typeof(T));
+
+                        if (FindObjectsOfType(typeof(T)).Length > 1)
+                        {
+                            return _instance;
+                        }
+                
+                    }
+                    return _instance;
+                }
             }
         }
-    }
 
-    private static bool applicationIsQuitting = false;
+        private static bool applicationIsQuitting = false;
+    }
 }

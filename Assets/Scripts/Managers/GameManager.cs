@@ -1,14 +1,22 @@
-using UnityEngine;
+using Controllers;
+using Other;
+using Panel;
+using StateMachine.States;
 
-public class GameManager : Singleton<GameManager>
+namespace Managers
 {
-    public GameObject CollectPanel;
-    public GameObject BombPanel;
-
-    public void Restart()
+    public class GameManager : Singleton<GameManager>
     {
-        ZoneController.Instance.Restart();
-        PendingRewardsPanel.Instance.Restart();
-        GameStateManager.Instance.SetState(GameStateManager.Instance.IdleState);
+        public static readonly StateMachine.Core.StateMachine StateMachine = new (
+            new IdleState(),
+            new SpinState(),
+            new BombState(),
+            new CollectState());
+        public void Restart()
+        {
+            ZoneController.Instance.Restart();
+            PendingRewardsPanel.Instance.Restart();
+            StateMachine.EnterState<IdleState>();
+        }
     }
 }
