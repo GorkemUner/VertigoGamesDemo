@@ -58,9 +58,11 @@ public class ZoneController : Singleton<ZoneController>
         infiniteZoneSlider.ShiftLeft(() =>
         {
             CurrZone++;
-            WheelController.Instance.FillWheel(currZone);
+
             if (WheelController.Instance.WheelData.willWonRewardId != RewardIDs.bomb)
                 GameStateManager.Instance.SetState(GameStateManager.Instance.IdleState);
+
+            WheelController.Instance.FillWheel(currZone);
 
         });
     }
