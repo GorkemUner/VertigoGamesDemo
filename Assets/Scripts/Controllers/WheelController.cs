@@ -72,6 +72,7 @@ public class WheelController : Singleton<WheelController>
         float rotation = (Random.Range(spinCountMin, spinCountMax) * 360) + (angleBetweenRewards * resultRewardIndex);
         wheelTransform.transform.DORotate(new Vector3(0, 0, rotation), rotateDuration, RotateMode.FastBeyond360)
             .SetEase(Ease.InOutCubic)
+            .SetId(this)
             .OnComplete(() => OnSpinCompleted());
     }
 
@@ -110,5 +111,11 @@ public class WheelController : Singleton<WheelController>
         descText.text = desc;
         titleText.color = color;
         descText.color = color;
+    }
+
+
+    void OnDestroy()
+    {
+        DOTween.Kill(this);
     }
 }

@@ -30,6 +30,7 @@ public class InfiniteZoneSlider : MonoBehaviour
         {
             item.DOAnchorPosX(item.anchoredPosition.x - shiftAmount, shiftTime)
                 .SetEase(Ease.Linear)
+                .SetId(this)
                 .OnComplete(() =>
                 {
                     completedTweens++;
@@ -72,5 +73,10 @@ public class InfiniteZoneSlider : MonoBehaviour
             items[i].anchoredPosition = new Vector2(100 * i, items[i].anchoredPosition.y);
             items[i].GetComponent<TextMeshProUGUI>().text = (i + 1).ToString();
         }
+    }
+
+    void OnDestroy()
+    {
+        DOTween.Kill(this);
     }
 }
