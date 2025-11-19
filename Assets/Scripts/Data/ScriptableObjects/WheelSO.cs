@@ -4,7 +4,7 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Wheel/WheelConfig")]
 public class WheelSO : ScriptableObject
 {
-    public WheelType type;
+    public WheelZoneType type;
     public List<RewardSO> MustRewards;
     public List<RewardSO> PreferredRewards;
 
@@ -18,11 +18,4 @@ public class WheelSO : ScriptableObject
     //            MustRewards.RemoveAt(MustRewards.Count - 1);
     //    }
     //}
-}
-
-public enum WheelType
-{
-    Normal,
-    Safe,
-    Super
 }
