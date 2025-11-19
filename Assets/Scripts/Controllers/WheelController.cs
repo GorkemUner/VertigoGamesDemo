@@ -27,11 +27,13 @@ public class WheelController : Singleton<WheelController>
     private int resultRewardIndex;
     private const float angleBetweenRewards = 45;
     private const float rotateDuration = 2f;
-    private WheelData wheelData = new WheelData();
     private Button spinBtn;
 
     private const int sliceCount = 8;
     public int SliceCount => sliceCount;
+
+    private WheelData wheelData = new WheelData();
+    public WheelData WheelData => wheelData;
 
     private void OnEnable()
     {
@@ -60,9 +62,7 @@ public class WheelController : Singleton<WheelController>
         wheelData = WheelResolver.Resolve(zone);
         resultRewardIndex = wheelData.rewards.IndexOf(wheelData.rewards.First(x => x.id == wheelData.willWonRewardId));
         for (int i = 0; i < wheelData.rewards.Count; i++)
-        {
             rewardItems[i].Fill(ClientItemDatabase.Instance.GetItem((int)wheelData.rewards[i].id), wheelData.rewards[i].baseReward);
-        }
     }
 
     public void Spin()
@@ -83,8 +83,7 @@ public class WheelController : Singleton<WheelController>
         PendingRewardsPanel.Instance.CreateItemWheelData(wheelData);
         ZoneController.Instance.NextZone();
 
-        if (wheelData.willWonRewardId != RewardIDs.bomb)
-            GameStateManager.Instance.SetState(GameStateManager.Instance.IdleState);
+
     }
 
     private void OnZoneTypeChange(WheelZoneType wheelZoneType)

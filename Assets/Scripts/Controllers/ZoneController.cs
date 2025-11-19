@@ -1,7 +1,6 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-[System.Serializable]
 public class OnZoneTypeChanged : UnityEvent<WheelZoneType> { }
 public class OnCurrZoneChanged : UnityEvent<int> { }
 
@@ -59,7 +58,13 @@ public class ZoneController : Singleton<ZoneController>
     public void NextZone()
     {
         CurrZone++;
-        infiniteZoneSlider.ShiftLeft(() => WheelController.Instance.FillWheel(currZone));
+        infiniteZoneSlider.ShiftLeft(() =>
+        {
+            WheelController.Instance.FillWheel(currZone);
+            if (WheelController.Instance.WheelData.willWonRewardId != RewardIDs.bomb)
+                GameStateManager.Instance.SetState(GameStateManager.Instance.IdleState);
+
+        });
     }
 
     public void Restart()
