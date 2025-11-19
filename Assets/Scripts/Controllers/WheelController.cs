@@ -27,6 +27,7 @@ public class WheelController : Singleton<WheelController>
     private int resultRewardIndex;
     private const float angleBetweenRewards = 45;
     private const float rotateDuration = 2f;
+    private const float fullRotation = 360f;
     private Button spinBtn;
 
     private const int sliceCount = 8;
@@ -69,7 +70,7 @@ public class WheelController : Singleton<WheelController>
     {
         GameStateManager.Instance.SetState(GameStateManager.Instance.SpinningState);
 
-        float rotation = (Random.Range(spinCountMin, spinCountMax) * 360) + (angleBetweenRewards * resultRewardIndex);
+        float rotation = (Random.Range(spinCountMin, spinCountMax) * fullRotation) + (angleBetweenRewards * resultRewardIndex);
         wheelTransform.transform.DORotate(new Vector3(0, 0, rotation), rotateDuration, RotateMode.FastBeyond360)
             .SetEase(Ease.InOutCubic)
             .SetId(this)
