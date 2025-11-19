@@ -1,6 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
-using UnityEditor;
 using UnityEngine;
 
 public class ClientItemDatabase : Singleton<ClientItemDatabase>
@@ -30,9 +28,7 @@ public class ClientItemDatabase : Singleton<ClientItemDatabase>
 //        // RewardSO'ları otomatik bul
 //        string[] guids = AssetDatabase.FindAssets("t:RewardSO");
 
-//        items = guids
-//            .Select(guid => AssetDatabase.LoadAssetAtPath<RewardSO>(AssetDatabase.GUIDToAssetPath(guid)))
-//            .ToList();
+//        items = guids.Select(guid => AssetDatabase.LoadAssetAtPath<RewardSO>(AssetDatabase.GUIDToAssetPath(guid))).ToList();
 
 //        Debug.Log($"ClientItemDatabase otomatik dolduruldu! ({items.Count} adet RewardSO)");
 //    }
