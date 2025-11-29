@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Controllers;
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
@@ -14,7 +15,7 @@ namespace Panel
         [SerializeField] private float leftBorderX;
         [SerializeField] private float shiftTime = .4f;
 
-        private int zone = 19;
+        private int zoneCount = 19;
         private int spacing = 50;
         private bool isAnimating = false;
 
@@ -24,7 +25,6 @@ namespace Panel
             isAnimating = true;
 
             float shiftAmount = itemWidth + spacing;
-            int totalItems = items.Count;
 
             int completedTweens = 0;
 
@@ -37,7 +37,7 @@ namespace Panel
                     {
                         completedTweens++;
 
-                        if (completedTweens == totalItems)
+                        if (completedTweens == zoneCount)
                         {
                             ReorderItems(shiftAmount);
                             isAnimating = false;
@@ -63,8 +63,7 @@ namespace Panel
                     first.anchoredPosition.y
                 );
 
-                zone++;
-                first.GetComponent<TMPro.TextMeshProUGUI>().text = zone.ToString();
+                first.GetComponent<TMPro.TextMeshProUGUI>().text = (zoneCount + Convert.ToInt32(first.GetComponent<TMPro.TextMeshProUGUI>().text)).ToString();
             }
         }
 
